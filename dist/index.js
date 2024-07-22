@@ -9200,12 +9200,11 @@ async function run() {
         replace: processedTitleText,
       })[inputs.titleUpdateAction];
       core.info(`New title: ${request.title}`);
+      core.setOutput('title', request.title);
     } else {
       core.warning('No updates were made to PR title');
+      core.setOutput('title', title);
     }
-
-    // set outputs title, even it is not updated, used for further processing
-    core.setOutput('title', request.title);
 
     const body = github.context.payload.pull_request.body || '';
     const processedBodyText = inputs.bodyTemplate
