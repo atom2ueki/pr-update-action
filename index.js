@@ -106,6 +106,9 @@ async function run() {
       core.warning('No updates were made to PR title');
     }
 
+    // set outputs title, even it is not updated, used for further processing
+    core.setOutput('title', request.title);
+
     const body = github.context.payload.pull_request.body || '';
     const processedBodyText = inputs.bodyTemplate
       .replace(baseTokenRegex, upperCase(inputs.bodyUppercaseBaseMatch, matches.baseMatch))
